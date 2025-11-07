@@ -3,6 +3,7 @@ package org.example.sandbox.trees.binarysearchtree;
 
 import org.example.sandbox.trees.ElementNotFoundException;
 import org.example.sandbox.trees.Tree;
+import org.example.sandbox.trees.binarytree.BinaryTree;
 
 import java.util.*;
 
@@ -177,7 +178,17 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private void preOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
-        // TODO implement pre order iterator
+
+        // Visit the current node (in the figure: position red).
+        // Recursively traverse the current node's left subtree.
+        // Recursively traverse the current node's right subtree.
+
+        // ROOT LEFT RIGHT
+        if (node != null) {
+            tempList.add(node.element);
+            preOrder(node.left, tempList);
+            preOrder(node.right, tempList);
+        }
     }
 
     public Iterator<T> iteratorInOrder() {
@@ -189,7 +200,17 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private void inOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
-        // TODO implement in order iterator
+
+        // Recursively traverse the current node's left subtree.
+        // Visit the current node (in the figure: position green).
+        // Recursively traverse the current node's right subtree.
+
+        // LEFT ROOT RIGHT
+        if (node != null) {
+            inOrder(node.left, tempList);
+            tempList.add(node.element);
+            inOrder(node.right, tempList);
+        }
     }
 
     public Iterator<T> iteratorPostOrder() {
@@ -201,7 +222,17 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
     }
 
     private void postOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
-        // TODO implement post order iterator
+
+        // Recursively traverse the current node's left subtree.
+        // Recursively traverse the current node's right subtree.
+        // Visit the current node (in the figure: position blue).
+
+        // LEFT RIGHT ROOT
+        if (node != null) {
+            postOrder(node.left, tempList);
+            postOrder(node.right, tempList);
+            tempList.add(node.element);
+        }
     }
 
     public Iterator<T> iteratorLevelOrder() {
@@ -214,7 +245,28 @@ public class BinarySearchTree<T extends Comparable> implements Tree<T> {
 
     private void levelOrder(BinaryTreeNode<T> node, Queue<T> tempList) {
 
-        // TODO implement level order iterator
+        // temporary node queue
+        Queue<BinaryTreeNode<T>> queue = new LinkedList<>();
+        queue.add(node);
+
+        // while there are nodes to process...
+        while (!queue.isEmpty()) {
+
+            // store node value
+            BinaryTreeNode<T> tempNode = queue.poll();
+            tempList.add(tempNode.element);
+
+            // store left child if not null
+            if (tempNode.left != null) {
+                queue.add(tempNode.left);
+            }
+
+            // store right child if not null
+            if (tempNode.right != null) {
+                queue.add(tempNode.right);
+            }
+
+        }
 
     }
 

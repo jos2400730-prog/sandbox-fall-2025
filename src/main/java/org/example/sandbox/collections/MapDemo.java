@@ -18,5 +18,7 @@ public class MapDemo {
         System.out.println(numbers.remove(5));
         System.out.println(numbers.get(5));
 
+        Map<Integer,String> treeMap = new TreeMap<>();
+
     }
 }
